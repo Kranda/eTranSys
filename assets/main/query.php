@@ -128,6 +128,9 @@
 
 			if ($stmt->fetchColumn() > 0) {
 				$_SESSION['school_id'] = $school_id;
+				$_SESSION['adminusername'] = $username;
+
+
 
 				if ($type == 'EL') {
 					header('location: ../../schools/elementary/index.php');

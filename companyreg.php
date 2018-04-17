@@ -1,3 +1,57 @@
+<?php 
+session_start();  
+$servername = "127.0.0.1";
+$username = "root";
+$password = "";
+
+// 		private $dbname = 'etransys_college';
+$conn = mysqli_connect("127.0.0.1","root","","etransys_college");
+
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+
+
+  if(isset($_POST['submit'])){
+   
+
+    $name     =  $_POST['name'];
+    $address  =  $_POST['address1'];
+    $website  =  $_POST['website']; 
+    $username =  $_POST['username'];
+    $pwd      =  $_POST['pwd'];
+
+
+
+
+
+
+
+    $sql = "INSERT INTO co_company ( fname , ads, website, username, pwd ) VALUES ('$name','$address','$website','$username','$pwd' ) ";
+    $result = mysqli_query($conn, $sql); 
+ 
+    if($result){
+     
+  echo "<p class='text-center bg-success'>
+Account created successfully
+  
+  </p>";
+  
+     }
+     else{
+      echo mysqli_error($conn);
+      echo "<p class='text-center bg-warning'>
+      Sorry an error occurred, please try again later
+      
+      </p>";
+     }
+
+    }
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,13 +131,13 @@
 
 <!-- This will add font awesome text, Bootstrap columns  and links  -->
 
-<div class="container">
+<div class="container mb-5">
     <div class="row mt-4">
           <div class="col-md-6 mx-auto">
             <!-- This will hold the register form -->
             <p>REGISTER</p>
 
-            <form>
+            <form method="post">
   <div class="form-group">
     <label for="name">Company Name * </label>
     <input type="text"  name="name"  class="form-control" id="name" aria-describedby="emailHelp" placeholder="Company Name" required>
@@ -92,7 +146,7 @@
 
  <div class="form-group">
     <label for="address">Company Address *</label>
-    <input type="text" name="address" class="form-control" id="address" aria-describedby="emailHelp" placeholder="Address" required>
+    <input type="text" name="address1" class="form-control" id="address" aria-describedby="emailHelp" placeholder="Address" required>
     
   </div>
 
@@ -104,7 +158,7 @@
 
   <div class="form-group">
     <label for="username">Username *</label>
-    <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Username " required>
+    <input type="text" name="username" class="form-control" id="username " aria-describedby="emailHelp" placeholder="Username " required>
     
   </div>  
 
@@ -115,7 +169,7 @@
   
   
 
-  <button type="submit" class="btn btn-primary">Create Account</button>
+  <button type="submit" name="submit" class="btn btn-primary">Create Account</button>
 </form>
             
           </div>

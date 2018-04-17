@@ -28,6 +28,14 @@
 			$stmt = $this->pdo->query("SELECT * FROM $table WHERE school_id='$school_id'");
 			return $stmt->fetch(PDO::FETCH_OBJ);
 		}
+		function getAdminProfile($school_id, $db) {
+			$this->db = strtolower($db);
+			$table = $this->db.'_admin';
+
+			$stmt = $this->pdo->query("SELECT * FROM $table WHERE school_id='$school_id'");
+			return $stmt->fetch(PDO::FETCH_OBJ);
+		}
+
 
 		function imageUpload($image) {
 			$maxsize = 2097152;

@@ -1,3 +1,95 @@
+<?php 
+session_start();  
+$servername = "127.0.0.1";
+$username = "root";
+$password = "";
+
+// 		private $dbname = 'etransys_college';
+$conn = mysqli_connect("127.0.0.1","root","","etransys_college");
+
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+
+
+  if(isset($_POST['submit'])){
+   
+ 
+
+    $username  = $_POST['username']; 
+    $password  = $_POST['password']; 
+ 
+
+     $sql = "SELECT  * FROM co_company WHERE username = '$username' AND pwd = '$password' ";
+     $result = mysqli_query($conn ,  $sql);
+     $row = mysqli_num_rows($result); 
+   
+     if(mysqli_num_rows($result) === 1){
+      echo "<p class='text-center bg-success'>
+      Login successfully
+        
+       </p>";
+
+       //store required fields into a session 
+       $row=mysqli_fetch_assoc($result); 
+     
+
+       $_SESSION['username'] = $row['username'];
+       $_SESSION['address'] = $row['ads'];
+       $_SESSION['companyname'] =  $row['fname'];
+       $_SESSION['website'] = $row['website'];
+       $_SESSION['loggedincomp'] = 'yes';
+
+       header("Location: http://localhost/etransys/company/index.php");
+       die();
+
+      
+
+     
+     }
+     else{
+      echo "<p class='text-center bg-warning'>
+        Incorrect login details
+            
+         </p>";
+
+     }
+
+
+
+
+
+
+
+
+
+//     $sql = "INSERT INTO co_company ( fname , ads, website, username, pwd ) VALUES ('$name','$address','$website','$username','$pwd' ) ";
+//     $result = mysqli_query($conn, $sql); 
+ 
+//     if($result){
+     
+//   echo "<p class='text-center bg-success'>
+// Account created successfully
+  
+//   </p>";
+  
+//      }
+//      else{
+//       echo mysqli_error($conn);
+//       echo "<p class='text-center bg-warning'>
+//       Sorry an error occurred, please try again later
+      
+//       </p>";
+//      }
+
+    }
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +122,7 @@
 	<title>Company</title>
 </head>
 <body>
-	<!-- Adding Navigation Bar -->
+
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<img src="images/logoets.png" alt="logo" class="logoimg navbar-brand">
 
@@ -63,39 +155,32 @@
     
   </div>
 </nav>
-	<!-- Cloing Navigation Bar -->
 
-
-	<!-- Adding Carousel  -->
 	   <div class="container">
 	   	  <h1 class="text-center">Company </h1>
 	   	  <p class="text-center">Please Login Below</p>
 
 	   </div>
-	<!-- Closing Carousel -->
-
-
-<!-- This will add font awesome text, Bootstrap columns  and links  -->
 
 <div class="container">
     <div class="row mt-4">
                  
         <div class="col-6  mx-auto">
-          <!-- this will hold the login form -->
+      
           <p>LOGIN</p>
 
-          <form>
+          <form method="post">
   <div class="form-group">
     <label for="exampleInputEmail1">Username *</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username"  name="userlogin>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username"  name="username">
     
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password *</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" name="loginpwd" placeholder="Password">
+    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
   </div>
  
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
 
   <medium> Don't have an account? <a href="companyreg.php"> Create one</a></medium>
 </form>
@@ -110,7 +195,6 @@
 
 
 
-	<!-- Footer openings -->
 
 
 <div class="footer">

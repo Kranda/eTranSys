@@ -132,7 +132,7 @@
   </div>
 
 
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="roleform">Role</label>
     <select class="form-control" id="roleform" name="identity" required>
       <option value="">Select your identity...</option>
@@ -140,7 +140,9 @@
       <option value="tutor">Professor</option>
       <option value="student">Student</option>
      </select>
-  </div>
+  </div> -->
+
+  <input type="hidden" name="identity" value="admin" >
 
 
 

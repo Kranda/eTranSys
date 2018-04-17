@@ -8,7 +8,7 @@ session_start();
 // 		private $dbhost = '127.0.0.1';
 // 		private $dbname = 'etransys_college';
 
-if(isset( $_SESSION['school_id'])){
+if(isset( $_SESSION['loggedincomp'])){
 }
 		else{
 				header("Location: http://localhost/etransys/college_login.php");
@@ -29,8 +29,7 @@ if (mysqli_connect_errno())
   }
 
 
-$schoolid = $_SESSION['school_id'];
-$username = $_SESSION['adminusername'];
+
 
 
 
@@ -70,7 +69,7 @@ $username = $_SESSION['adminusername'];
 <body>
 	<!-- Adding Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<img src="../../../images/logoets.png" alt="logo" class="logoimg navbar-brand">
+		<img src="../images/logoets.png" alt="logo" class="logoimg navbar-brand">
 
  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,11 +84,13 @@ $username = $_SESSION['adminusername'];
         <a class="nav-link" href="index.php">Admin Profile| <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="school.php"> Register Student | </a>
+        <a class="nav-link" href="request.php"> Request Transcript | </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="uploadresult.php">Upload Result |</a>
+        <a class="nav-link" href="view.php"> View Transcipts | </a>
       </li>
+    
+    
       <li class="nav-item "> 
         <a class="nav-link" href="logout.php">Logout </a>
       </li>
@@ -105,35 +106,36 @@ $username = $_SESSION['adminusername'];
 
 	<!-- Adding Carousel  -->
 	   <div class="container">
-	   	  <h1 class="text-center">Administrator Profile</h1>
+	   	  <h1 class="text-center">Company Profile</h1>
 
 	   	  <div class="row">
 
 				 <?php
-				 $sql = "SELECT * FROM co_admin WHERE  username = '$username' ";
+         $username = $_SESSION['username'];
+				 $sql = "SELECT * FROM co_company WHERE  username = '$username' ";
 				 $result = mysqli_query($conn, $sql);
 				 
 				 if (mysqli_num_rows($result) > 0) {
 					 // output data of each row
 					 while($row = mysqli_fetch_assoc($result)) {
 					echo '	<div class="col-2 text-right">
-						Name : 
+						Company Name : 
 					</div>
 					<div class="col-10 text-left">
-						'.$row["name"].' 
+						'.$row["fname"].' 
 					</div>
 
 					 <div class="col-2 text-right">
-						Email : 
+						Company Address : 
 					</div>
 					<div class="col-10 text-left">
-					'.$row["email"].' 
+					'.$row["ads"].' 
 					</div>
 					 <div class="col-2 text-right">
-						Phone : 
+						Official Website : 
 					</div>
 					<div class="col-10 text-left">
-						'.$row["phone"].' 
+						'.$row["website"].' 
 					</div>
 
 					 
@@ -151,31 +153,31 @@ $username = $_SESSION['adminusername'];
 
 
 
-				 $sql = "SELECT * FROM co_schools WHERE  school_id = '$schoolid' ";
-				 $result = mysqli_query($conn, $sql);
+				//  $sql = "SELECT * FROM co_schools WHERE  school_id = '$schoolid' ";
+				//  $result = mysqli_query($conn, $sql);
 				 
-				 if (mysqli_num_rows($result) > 0) {
-					 // output data of each row
-					 while($row = mysqli_fetch_assoc($result)) {
-					echo '	<div class="col-2 text-right">
-						School Name : 
-					</div>
-					<div class="col-10 text-left">
-						'.$row["name"].' 
-					</div>
+// 				 if (mysqli_num_rows($result) > 0) {
+// 					 // output data of each row
+// 					 while($row = mysqli_fetch_assoc($result)) {
+// 					echo '	<div class="col-2 text-right">
+// 						School Name : 
+// 					</div>
+// 					<div class="col-10 text-left">
+// 						'.$row["name"].' 
+// 					</div>
 
-					 <div class="col-2 text-right">
-						School Address : 
-					</div>
-					<div class="col-10 text-left">
-					'.$row["address"].' 
-					</div>
+// 					 <div class="col-2 text-right">
+// 						School Address : 
+// 					</div>
+// 					<div class="col-10 text-left">
+// 					'.$row["address"].' 
+// 					</div>
 					 
-';
-					 }
-				 } else {
-					 echo "0 results";
-				 }
+// ';
+// 					 }
+// 				 } else {
+// 					 echo "0 results";
+// 				 }
 				 
 				 mysqli_close($conn);
 				 
