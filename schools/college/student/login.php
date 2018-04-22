@@ -40,7 +40,7 @@ if (mysqli_connect_errno())
 <body>
 	<!-- Adding Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<img src="images/logoets.png" alt="logo" class="logoimg navbar-brand">
+		<img src="../../../images/logoets.png" alt="logo" class="logoimg navbar-brand">
 
  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,16 +52,16 @@ if (mysqli_connect_errno())
   		
   		<ul class="navbar-nav mr-auto">
       <li class="nav-item ">
-        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="../../../index.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="school.php">School </a>
+        <a class="nav-link" href="../../../school.php">School </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="company.php">Company</a>
+        <a class="nav-link" href="../../../company.php">Company</a>
       </li>
       <li class="nav-item "> 
-        <a class="nav-link" href="about.php">About </a>
+        <a class="nav-link" href="../../../about.php">About </a>
       </li>
       
     </ul>
@@ -76,8 +76,8 @@ if (mysqli_connect_errno())
 
 	<!-- Adding Carousel  -->
 	   <div class="container">
-	   	  <h1 class="text-center">College / University Login </h1>
-	   	  <p class="text-center">Provide Login Below. </p>
+	   	  <h1 class="text-center">Student Login </h1>
+	   	  <p class="text-center"><small >Provide Login Below. </small></p>
 
 	   </div>
 	<!-- Closing Carousel -->
@@ -89,18 +89,18 @@ if (mysqli_connect_errno())
 
   <?php 
 
-      if(isset ($_GET['in'])){
-           if($_GET['in']==="success"){
-        echo "<p class='bg-success text-center'> Account was successfully created</p>";
-      }
-      else if($_GET['in']==="error"){
-         echo "<p class='bg-warning'> Account was not successfully created</p>";
-   }
-   else if($_GET['in']==="incorrect"){
-     echo "<p class='text-danger text-center mx-auto'> Incorrect Login credentials, Please try again </p>";
-   }
+//       if(isset ($_GET['in'])){
+//            if($_GET['in']==="success"){
+//         echo "<p class='bg-success text-center'> Account was successfully created</p>";
+//       }
+//       else if($_GET['in']==="error"){
+//          echo "<p class='bg-warning'> Account was not successfully created</p>";
+//    }
+//    else if($_GET['in']==="incorrect"){
+//      echo "<p class='text-danger text-center mx-auto'> Incorrect Login credentials, Please try again </p>";
+//    }
 
-      }
+//       }
 
    
   
@@ -116,42 +116,16 @@ if (mysqli_connect_errno())
     <div class="row ">
 
           <div class="col-6 mx-auto ">
-                <form method="POST" action="assets/main/query.php">
+                <form method="POST" action="../../../assets/main/query.php">
 
-                  <input type="hidden" name="type" value="CO">
+                  
 
-
-     <div class="form-group">
-    <label for="collegeform">College</label>
-    <select class="form-control" id="collegeform" name="school_id" required>
-      <option value="">Select College...</option>
-<?php
-
-                  $sql = "SELECT * FROM co_schools";
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = mysqli_fetch_assoc($result)) {
-                    $schoolid = $row['school_id'];
-                    $name = $row['name'];
-                    echo '
-                      <option value="'.$schoolid.'">'.$name.'</option>
-                    ';
-                  }
-                ?>
-
-
-      
-     </select>
-  </div>
-
-
-
-  <input type="hidden" name="identity" value="admin" >
 
 
 
         <div class="form-group">
-          <label for="exampleInputEmail1">Username </label>
-          <input type="text" class="form-control" id="exampleInputEmail1" name="username" placeholder="Username" required>
+          <label for="exampleInputEmail1">Student ID </label>
+          <input type="text" class="form-control" id="exampleInputEmail1" name="student_id" placeholder="Student ID" required>
           
         </div>
 
@@ -160,10 +134,10 @@ if (mysqli_connect_errno())
           <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
         </div>
         
-        <input type="submit" name="login" value="Login" class="btn btn-primary">
+        <input type="submit" name="login_student" value="Login" class="btn btn-primary ">
 
-         <p class="mt-5">Don't have an account yet?
-         <a href="register.php">Sign up now</a> </p>
+        
+      
 
     </form>
             

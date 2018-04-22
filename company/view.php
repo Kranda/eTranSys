@@ -1,12 +1,7 @@
 <?php 
 
-//require('../../../assets/main/main.php');
 
 session_start(); 
-// private $dbuser = 'root'; 
-// 		private $dbpass = '';
-// 		private $dbhost = '127.0.0.1';
-// 		private $dbname = 'etransys_college';
 
 if(isset( $_SESSION['loggedincomp'])){
 }

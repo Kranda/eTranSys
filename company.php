@@ -1,10 +1,6 @@
 <?php 
 session_start();  
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
 
-// 		private $dbname = 'etransys_college';
 $conn = mysqli_connect("127.0.0.1","root","","etransys_college");
 
 // Check connection

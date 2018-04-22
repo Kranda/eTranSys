@@ -11,6 +11,9 @@
 			else if (isset($_POST['login'])) {
 				$this->login();
 			}
+			else if(isset($_POST['login_student'])){
+				$this -> loginStudent();
+			}
 			else {
 				header('../../index.php');
 			}
@@ -55,6 +58,24 @@
 			}
 			else {
 				header('location: ../../register.php?in=error');
+			}
+		}
+
+		function loginStudent(){
+			$this->db = 'CO';
+			$this->main = $this->selectDB($this->db);
+
+			$student_id = $_POST['student_id'];
+			$password = $_POST['password'];
+			$stmt = $this->main->pdo->query("SELECT COUNT(*) FROM co_students WHERE matric_no='$student_id' AND password='$password' ");
+			if ($stmt->fetchColumn() > 0) {
+				$_SESSION['student_id'] = $student_id;
+				
+				header('location: http://localhost/etransys/schools/college/student/index.php');
+				
+			}
+			else {
+				header('location: http://localhost/etransys/schools/college/student/login.php?in=incorrect');
 			}
 		}
 
