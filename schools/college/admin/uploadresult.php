@@ -128,7 +128,7 @@ if(isset($_POST['submit'])){
         <a class="nav-link" href="school.php"> Register Student | </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="uploadresult.php">Upload Result |</a>
+        <a class="nav-link" href="uploadresult.php">Upload Transcript |</a>
       </li>
       <li class="nav-item "> 
         <a class="nav-link" href="logout.php">Logout </a>
@@ -145,7 +145,7 @@ if(isset($_POST['submit'])){
 
 	<!-- Adding Carousel  -->
 	   <div class="container">
-	   	  <h1 class="text-center">Upload Student Results</h1> 
+	   	  <h1 class="text-center">Upload Transcript</h1> 
 
      
 

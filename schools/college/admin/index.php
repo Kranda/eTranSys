@@ -88,7 +88,7 @@ $username = $_SESSION['adminusername'];
         <a class="nav-link" href="school.php"> Register Student | </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="uploadresult.php">Upload Result |</a>
+        <a class="nav-link" href="uploadresult.php">Upload Transcript |</a>
       </li>
       <li class="nav-item "> 
         <a class="nav-link" href="logout.php">Logout </a>

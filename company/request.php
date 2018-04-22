@@ -3,10 +3,6 @@
 //require('../../../assets/main/main.php');
 
 session_start(); 
-// private $dbuser = 'root'; 
-// 		private $dbpass = '';
-// 		private $dbhost = '127.0.0.1';
-// 		private $dbname = 'etransys_college';
 
 if(isset( $_SESSION['loggedincomp'])){
 }
@@ -27,11 +23,6 @@ if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
-
-
-
-
-
 
 ?>
 
@@ -151,11 +142,6 @@ if (mysqli_connect_errno())
                     
                  }
 
-
-
-
-
-
                 }
                 else{
                     echo '<p class="text-danger text-center"> Sorry there is not student with such registration Number, Please try again </p>';
@@ -177,9 +163,9 @@ if (mysqli_connect_errno())
              <div class="col-8 mx-auto">
              <form method="post">
   <div class="form-group">
-    <label for="exampleInputEmail1">Student Matriculation Number</label>
+    <label for="exampleInputEmail1">Student ID Number</label>
     <input type="text" name="matric" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" required>
-    <small id="emailHelp" class="form-text text-muted">Please provide the student Matriculation Number</small>
+    <small id="emailHelp" class="form-text text-muted">Please provide the student ID number</small>
   </div>
   
   
@@ -192,10 +178,6 @@ if (mysqli_connect_errno())
 
 	   </div>
 	<!-- Closing Carousel -->
-
-
-
-
 
 
 	<!-- Footer openings -->

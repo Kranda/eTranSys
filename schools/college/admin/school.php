@@ -133,7 +133,7 @@ if(isset($_POST['submit'])){
         <a class="nav-link" href="school.php"> Register Student | </a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="uploadresult.php">Upload Result |</a>
+        <a class="nav-link" href="uploadresult.php">Upload Transcript |</a>
       </li>
       <li class="nav-item "> 
         <a class="nav-link" href="logout.php">Logout </a>
@@ -167,8 +167,8 @@ if(isset($_POST['submit'])){
   </div>
 
   <div class="form-group">
-    <label for="matricno">Matriculation Number</label>
-    <input type="text" class="form-control" id="matricno" name="matric" placeholder="Unique Matriculation Number" required>
+    <label for="matricno">Student ID Number</label>
+    <input type="text" class="form-control" id="matricno" name="matric" placeholder="Student ID Number" required>
   </div>
 
   <div class="form-group">
@@ -187,8 +187,8 @@ if(isset($_POST['submit'])){
   </div>
 
   <div class="form-group">
-    <label for="department">Programme</label>
-    <input type="department" class="form-control"   name="department" placeholder="Programme" required>
+    <label for="department">Course</label>
+    <input type="department" class="form-control"   name="department" placeholder="Course" required>
   </div>
 
   
@@ -226,9 +226,6 @@ if(isset($_POST['submit'])){
 
 
   </div>
-
- 
-
 
 </form>
                   

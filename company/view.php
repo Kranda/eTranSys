@@ -107,7 +107,7 @@ if (mysqli_connect_errno())
 
 
 	   <div class="container">
-	   	  <h1 class="text-center">View Approved Transcript</h1>
+	   	  <h1 class="text-center">View Transcripts</h1>
 
              <div class="row">
                 <div class="col-12 mx-auto">
@@ -221,10 +221,6 @@ if (mysqli_connect_errno())
 
 	   </div>
 	<!-- Closing Carousel -->
-
-
-
-
 
 
 	<!-- Footer openings -->
