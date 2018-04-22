@@ -111,17 +111,9 @@
     
   </div>
 
-   <div class="form-group">
-    <label for="address">School Logo * </label>
-    <input type="file" name="logo" accept="image/*" required class="form-control"  >
-    
-  </div>
 
-    <div class="form-group">
-    <label for="moto">Motto *</label>
-    <input type="text" class="form-control" id="motto" aria-describedby="emailHelp" placeholder="School motto" name="motto" required>
+
     
-  </div>
 
   <div class="form-group">
     <label for="adminname">Administrator name *</label>

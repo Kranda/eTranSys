@@ -1,10 +1,6 @@
 <?php 
 session_start();  
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
 
-// 		private $dbname = 'etransys_college';
 $conn = mysqli_connect("127.0.0.1","root","","etransys_college");
 
 // Check connection
@@ -13,22 +9,12 @@ if (mysqli_connect_errno())
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
 
-
   if(isset($_POST['submit'])){
-   
-
-    $name     =  $_POST['name'];
+   $name     =  $_POST['name'];
     $address  =  $_POST['address1'];
     $website  =  $_POST['website']; 
     $username =  $_POST['username'];
     $pwd      =  $_POST['pwd'];
-
-
-
-
-
-
-
     $sql = "INSERT INTO co_company ( fname , ads, website, username, pwd ) VALUES ('$name','$address','$website','$username','$pwd' ) ";
     $result = mysqli_query($conn, $sql); 
  
@@ -185,24 +171,6 @@ Account created successfully
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<!-- Footer openings -->
 	
 
@@ -213,11 +181,6 @@ Account created successfully
 </div>
 	<!-- Footer closing -->
 
-
-
-
-
-	
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

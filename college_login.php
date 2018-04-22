@@ -84,6 +84,10 @@
 	   </div>
 	<!-- Closing Carousel -->
 
+  <div class="row">
+  <div class="col-12">
+  
+  
 
   <?php 
 
@@ -94,12 +98,18 @@
       else if($_GET['in']==="error"){
          echo "<p class='bg-warning'> Account was not successfully created</p>";
    }
+   else if($_GET['in']==="incorrect"){
+     echo "<p class='text-danger text-center mx-auto'> Incorrect Login credentials, Please try again </p>";
+   }
 
       }
 
    
   
   ?>
+  </div>
+  </div>
+
 
 
 <!-- This will add font awesome text, Bootstrap columns  and links  -->
@@ -132,15 +142,6 @@
   </div>
 
 
-  <!-- <div class="form-group">
-    <label for="roleform">Role</label>
-    <select class="form-control" id="roleform" name="identity" required>
-      <option value="">Select your identity...</option>
-      <option value="admin">Adminstrator</option>
-      <option value="tutor">Professor</option>
-      <option value="student">Student</option>
-     </select>
-  </div> -->
 
   <input type="hidden" name="identity" value="admin" >
 
