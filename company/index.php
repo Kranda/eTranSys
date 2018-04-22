@@ -1,31 +1,24 @@
 <?php 
 
-//require('../../../assets/main/main.php');
-
 session_start(); 
-// private $dbuser = 'root'; 
-// 		private $dbpass = '';
-// 		private $dbhost = '127.0.0.1';
-// 		private $dbname = 'etransys_college';
 
-if(isset( $_SESSION['loggedincomp'])){
+if(isset($_SESSION['loggedincomp'])){
+
 }
 		else{
-				header("Location: http://localhost/etransys/college_login.php");
-		 	die();
+				header("Location: http://localhost/etransys/company.php");
+		  	die();
 		} 
 
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
 
-// 		private $dbname = 'etransys_college';
+
 $conn = mysqli_connect("127.0.0.1","root","","etransys_college");
 
 // Check connection
 if (mysqli_connect_errno())
   {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	die();
   }
 
 
@@ -49,10 +42,7 @@ if (mysqli_connect_errno())
         		max-height: 180px;
         	}
 
-          .linksimage{
-            font-size: 60px;
-            color:green;
-          }
+       
 
         	.footer {
     position: fixed;
@@ -146,38 +136,14 @@ if (mysqli_connect_errno())
 					'.$row["username"].'  
 					</div> ';
 					 }
-				 } else {
+				 }
+				  else {
 					 echo "0 results";
 				 }
 
 
 
 
-				//  $sql = "SELECT * FROM co_schools WHERE  school_id = '$schoolid' ";
-				//  $result = mysqli_query($conn, $sql);
-				 
-// 				 if (mysqli_num_rows($result) > 0) {
-// 					 // output data of each row
-// 					 while($row = mysqli_fetch_assoc($result)) {
-// 					echo '	<div class="col-2 text-right">
-// 						School Name : 
-// 					</div>
-// 					<div class="col-10 text-left">
-// 						'.$row["name"].' 
-// 					</div>
-
-// 					 <div class="col-2 text-right">
-// 						School Address : 
-// 					</div>
-// 					<div class="col-10 text-left">
-// 					'.$row["address"].' 
-// 					</div>
-					 
-// ';
-// 					 }
-// 				 } else {
-// 					 echo "0 results";
-// 				 }
 				 
 				 mysqli_close($conn);
 				 

@@ -11,15 +11,10 @@ session_start();
 if(isset( $_SESSION['loggedincomp'])){
 }
 		else{
-				header("Location: http://localhost/etransys/college_login.php");
+				header("Location: http://localhost/etransys/company.php");
 		 	die();
 		} 
 
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
-
-// 		private $dbname = 'etransys_college';
 $conn = mysqli_connect("127.0.0.1","root","","etransys_college");
 
 // Check connection
@@ -49,10 +44,7 @@ if (mysqli_connect_errno())
         		max-height: 180px;
         	}
 
-          .linksimage{
-            font-size: 60px;
-            color:green;
-          }
+    
 
         	.footer {
     position: fixed;
@@ -111,64 +103,7 @@ if (mysqli_connect_errno())
 
              <div class="row">
                 <div class="col-12 mx-auto">
-                <?php
-            if(isset($_POST['submit'])){
-                //store the values into a variable
-                $matric = $_POST['matric'];
-                
-
-                //check if student matric number exists 
-                $sql = "SELECT * FROM co_students WHERE matric_no= '$matric' ";
-                $result = mysqli_query($conn, $sql);
-                if (mysqli_num_rows($result) > 0) {
-                   //this means a student registration number actually exists  and send request 
-                   $row = mysqli_fetch_assoc($result); 
-                  
-                   
-                $name =  $row['name'];
-                $matric_no = $row['matric_no'];
-                $programme = $row['programme'];
-                $schoolid  = $row['school_id'];
-                $requestedby = $_SESSION['companyname']; 
-
-
-                //post to our database 
-                // studentname	studentid	course	school_id	requestedby	status	transcripturl
-
-             
-                $sql = "INSERT INTO co_request (studentname , studentid, course , school_id , requestedby)
-                 VALUES ('$name', '$matric_no', '$programme', '$schoolid', '$requestedby')";
-                 $result =  mysqli_query($conn, $sql);
-
-
-                 if($result){
-                    echo '<p class="text-success text-center">Your request was sent successfully. Awaiting approval </p>';
-                    
-
-                 }
-                 else{
-                    echo '<p class="text-danger text-center"> Sorry an error occured, Please try again later</p>';
-                    
-                 }
-
-
-
-
-
-
-                }
-                else{
-                    echo '<p class="text-danger text-center"> Sorry there is not student with such registration Number, Please try again </p>';
-
-                }
-                   
-
-
-            }
-    
-    
-    
-    ?>
+      
                         
                 </div>
              </div>

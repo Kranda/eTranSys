@@ -7,15 +7,10 @@ session_start();
 if(isset( $_SESSION['loggedincomp'])){
 }
 		else{
-				header("Location: http://localhost/etransys/college_login.php");
+				header("Location: http://localhost/etransys/company.php");
 		 	die();
 		} 
 
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
-
-// 		private $dbname = 'etransys_college';
 $conn = mysqli_connect("127.0.0.1","root","","etransys_college");
 
 // Check connection
@@ -40,10 +35,7 @@ if (mysqli_connect_errno())
         		max-height: 180px;
         	}
 
-          .linksimage{
-            font-size: 60px;
-            color:green;
-          }
+         
 
         	.footer {
     position: fixed;

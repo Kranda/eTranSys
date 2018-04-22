@@ -3,7 +3,7 @@
 
   class page {
     function __construct() {
-      // $this->co = new mainDB('CO');
+      
     }
   }
   $page = new page;
@@ -95,17 +95,6 @@
 
             <form method="POST" action="assets/main/query.php" enctype="multipart/form-data">
 
-
-       
-<!--   <div class="form-group">
-    <label for="roleform">School type</label>
-    <select class="form-control" id="school_type" name="school_type" required>
-      <option value="">Select school type</option>
-      <option value="college">College</option>
-      
-     </select>
-  </div> 
- -->
 
   <input type="hidden" name="school_type" value="college">
 
