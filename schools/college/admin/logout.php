@@ -1,6 +1,8 @@
 <?php 
 session_start();
-unset($_SESSION['school_id']);
+
+session_unset(); 
+session_destroy(); 
 
   header("Location: http://localhost/etransys/college_login.php");
 ?>

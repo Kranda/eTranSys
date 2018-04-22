@@ -1,12 +1,14 @@
 <?php
-  require('assets/main/main.php');
 
-  class page {
-    function __construct() {
-      $this->co = new mainDB('CO');
-    }
+session_start(); 
+$conn = mysqli_connect("127.0.0.1","root","","etransys_college");
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
-  $page = new page;
+
+  
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,7 +85,7 @@
 
 	   </div>
 	<!-- Closing Carousel -->
-
+  <div class="container">
   <div class="row">
   <div class="col-12">
   
@@ -114,10 +116,10 @@
 
 <!-- This will add font awesome text, Bootstrap columns  and links  -->
 
-<div class="container">
-    <div class="row mt-4">
 
-          <div class="col-6 mx-auto mt-4">
+    <div class="row ">
+
+          <div class="col-6 mx-auto ">
                 <form method="POST" action="assets/main/query.php">
 
                   <input type="hidden" name="type" value="CO">
@@ -128,10 +130,14 @@
     <select class="form-control" id="collegeform" name="school_id" required>
       <option value="">Select College...</option>
 <?php
-                  $stmt = $page->co->pdo->query("SELECT * FROM co_schools");
-                  while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+
+                  $sql = "SELECT * FROM co_schools";
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    $schoolid = $row['school_id'];
+                    $name = $row['name'];
                     echo '
-                      <option value="'.$row->school_id.'">'.$row->name.'</option>
+                      <option value="'.$schoolid.'">'.$name.'</option>
                     ';
                   }
                 ?>

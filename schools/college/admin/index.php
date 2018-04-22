@@ -1,12 +1,5 @@
 <?php 
-
-//require('../../../assets/main/main.php');
-
 session_start(); 
-// private $dbuser = 'root'; 
-// 		private $dbpass = '';
-// 		private $dbhost = '127.0.0.1';
-// 		private $dbname = 'etransys_college';
 
 if(isset( $_SESSION['school_id'])){
 }
@@ -15,25 +8,14 @@ if(isset( $_SESSION['school_id'])){
 		 	die();
 		} 
 
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
-
-// 		private $dbname = 'etransys_college';
 $conn = mysqli_connect("127.0.0.1","root","","etransys_college");
-
 // Check connection
 if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
-
-
 $schoolid = $_SESSION['school_id'];
 $username = $_SESSION['adminusername'];
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -49,11 +31,6 @@ $username = $_SESSION['adminusername'];
         		max-width: 180px; 
         		max-height: 180px;
         	}
-
-          .linksimage{
-            font-size: 60px;
-            color:green;
-          }
 
         	.footer {
     position: fixed;
@@ -148,9 +125,6 @@ $username = $_SESSION['adminusername'];
 					 echo "0 results";
 				 }
 
-
-
-
 				 $sql = "SELECT * FROM co_schools WHERE  school_id = '$schoolid' ";
 				 $result = mysqli_query($conn, $sql);
 				 
@@ -178,25 +152,12 @@ $username = $_SESSION['adminusername'];
 				 }
 				 
 				 mysqli_close($conn);
-				 
-				 
 				 ?>
-
-	
-	   	   
-	   	    
+ 
 	   	  </div>
-
-	   	  
-	   	 
 
 	   </div>
 	<!-- Closing Carousel -->
-
-
-
-
-
 
 	<!-- Footer openings -->
 
@@ -212,4 +173,4 @@ $username = $_SESSION['adminusername'];
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
-</html>i
+</html>
