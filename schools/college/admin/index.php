@@ -67,6 +67,10 @@ $username = $_SESSION['adminusername'];
       <li class="nav-item ">
         <a class="nav-link" href="uploadresult.php">Upload Transcript |</a>
       </li>
+			
+      <li class="nav-item ">
+        <a class="nav-link" href="transcriptrequest.php">Transcript Requests |</a>
+      </li>
       <li class="nav-item "> 
         <a class="nav-link" href="logout.php">Logout </a>
       </li>

@@ -1,22 +1,20 @@
 <?php 
-
-
 session_start(); 
 
-if(isset( $_SESSION['loggedincomp'])){
+if(isset( $_SESSION['student_id'])){
 }
-		else{
-				header("Location: http://localhost/etransys/company.php");
+else{
+			header("Location: http://localhost/etransys/schools/college/student/login.php?in=incorrect");
 		 	die();
 		} 
 
 $conn = mysqli_connect("127.0.0.1","root","","etransys_college");
-
 // Check connection
 if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
+$studentid = $_SESSION['student_id'];
 
 ?>
 
@@ -34,8 +32,6 @@ if (mysqli_connect_errno())
         		max-height: 180px;
         	}
 
-    
-
         	.footer {
     position: fixed;
     left: 0;
@@ -51,7 +47,7 @@ if (mysqli_connect_errno())
 <body>
 	<!-- Adding Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<img src="../images/logoets.png" alt="logo" class="logoimg navbar-brand">
+		<img src="../../../images/logoets.png" alt="logo" class="logoimg navbar-brand">
 
  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,16 +59,14 @@ if (mysqli_connect_errno())
   		
   		<ul class="navbar-nav mr-auto">
       <li class="nav-item ">
-        <a class="nav-link" href="index.php">Admin Profile| <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.php">Student Profile | <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item ">
-      <a class="nav-link" href="request.php"> Request Transcript | </a>
-    </li>
-
-    <li class="nav-item ">
-        <a class="nav-link" href="view.php"> View Transcipts | </a>
+        <a class="nav-link" href="view.php"> View Transcript | </a>
       </li>
-    
+      <li class="nav-item ">
+        <a class="nav-link" href="request.php">View Requests |</a>
+      </li>
       <li class="nav-item "> 
         <a class="nav-link" href="logout.php">Logout </a>
       </li>
@@ -83,28 +77,26 @@ if (mysqli_connect_errno())
     
   </div>
 </nav>
-	
+	<!-- Cloing Navigation Bar -->
 
+
+	<!-- Adding Carousel  -->
 	   <div class="container">
-	   	  <h1 class="text-center">View Transcripts</h1>
-
-             <div class="row">
-                <div class="col-12 mx-auto">
-      
-                        
-                </div>
-             </div>
-
-	   	  <div class="row"> 
+             <h1 class="text-center">View Personal Transcript</h1> 
+              <div class="row text-center"> 
+ 
              <div class="col-8 mx-auto">
              <table class="table">
              <thead>
                <tr>
-                 <th scope="col">Status</th>
+           
                  <th scope="col">Student Name</th>
-                 <th scope="col">Student ID</th>
-                 <th scope="col">Major</th>
-                 <th scope="col">Download Transcript </th>
+                 <th scope="col">Sex</th>
+                 <th scope="col">Email</th>
+                 <th scope="col">Phone</th>
+                 <th scope="col">Level</th>
+                 <th scope="col">Program</th>
+                 <th scope="col">View Transcript </th>
                </tr>
              </thead>
              <tbody>
@@ -112,42 +104,28 @@ if (mysqli_connect_errno())
                      
                    <?php 
                    //retreiving information from the request database 
-                   $requestedby = $_SESSION['companyname'];
-                   $sql = "SELECT * FROM co_request WHERE  requestedby = '$requestedby' "; 
+   
+                   $sql = "SELECT * FROM co_students WHERE  matric_no = '$studentid' ";
                    $result =  mysqli_query($conn, $sql); 
 
                    if (mysqli_num_rows($result) > 0) {
-                         //populate results
-                         
-  // loops through each row to populate the table
                         while($row = mysqli_fetch_assoc($result)) {
-
-                          $studentid = $row['studentid'];
-                          $requestedby = $row['requestedby']; 
-                          $url  = $row['transcripturl'];
-                          $status = $row['status'];
-                          $changedStatus = "";
-                          if($status == 'DENIED'){
-                            $changedStatus = 'Pending';
-                          }
-                          else{
-                            $changedStatus = 'Approved';
-                          }
-                        
+                         $url  = $row['transurl'];
 
                             echo "<tr>
-                            <td>".$changedStatus."</td>
-                                    <td>".$row['studentname']."</td>
-                                    <td>".$row['studentid']."</td>
-                                    <td>".$row['course']."</td> " ; 
+                            <td>".$row['name']."</td>
+                                    <td>".$row['sex']."</td>
+                                    <td>".$row['email']."</td>
+                                    <td>".$row['phone']."</td>
+                                    <td>".$row['level']."</td>
+                                    <td>".$row['programme']."</td> " ; 
 
-                                    if($status == 'APPROVED'){
-                                      echo "  <td><a type = 'button' class='btn btn-success' href='http://localhost/etransys/uploads/$url'> View Transcript </a> </td>";
+                                    if($url == null){
+                                        echo "  <td><button  class='btn btn-info' disabled> Unavailable </button> </td>";
+                                   
                                     }
                                     else{
-                                      echo "  <td><button  class='btn btn-info' disabled> Pending Approval </button> </td>";
-                                   
-
+                                        echo "  <td><a type = 'button' class='btn btn-success' href='http://localhost/etransys/uploads/$url'> View Transcript </a> </td>";
                                     }
                                    
                                   
@@ -167,15 +145,11 @@ if (mysqli_connect_errno())
            </table>
 
              </div>
-	   	  </div>
-           
-	   	 
-
-	   </div>
-	<!-- Closing Carousel -->
-
-
-	<!-- Footer openings -->
+	
+            
+ 
+                </div>   
+              </div>
 
 
 <div class="footer">
@@ -189,4 +163,4 @@ if (mysqli_connect_errno())
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
-</html>i
+</html>

@@ -62,7 +62,7 @@ $studentid = $_SESSION['student_id'];
         <a class="nav-link" href="index.php">Student Profile | <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href=""> View Transcript | </a>
+        <a class="nav-link" href="view.php"> View Transcript | </a>
       </li>
       <li class="nav-item ">
         <a class="nav-link" href="request.php">View Requests |</a>

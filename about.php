@@ -86,9 +86,6 @@
 
           <li>Saving staff resources by using user-friendly functionality to view, print, store, and download received transcripts</li> <p></p>
 
-          <li>Including email communication throughout the process</li>
-
-          
   </ul>
 </div>
 

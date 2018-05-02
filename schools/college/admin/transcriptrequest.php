@@ -1,19 +1,11 @@
 <?php 
-
 session_start(); 
-
 if(isset( $_SESSION['school_id'])){
-       
       }
       else{
-       
         header("Location: http://localhost/etransys/college_login.php");
         die();
-    
       } 
-
-
-// 		private $dbname = 'etransys_college';
 $conn = mysqli_connect("127.0.0.1","root","","etransys_college");
 
 // Check connection
@@ -26,7 +18,6 @@ if (mysqli_connect_errno())
 $schoolid = $_SESSION['school_id'];
 $username = $_SESSION['adminusername'];
 
-// 
    ?>
 
 <!DOCTYPE html>
@@ -98,26 +89,75 @@ $username = $_SESSION['adminusername'];
 
 	<!-- Adding Carousel  -->
 	   <div class="container">
-	   	  <h1 class="text-center">Upload Transcript</h1> 
+	   	  <h1 class="text-center">Company Requests</h1> 
 
          <?php
-           if(isset($_GET['statusFlag'])){ 
-             $statusFlag = $_GET['statusFlag'];
 
-           
-             if($statusFlag == "success" ){
-              $message= $_GET['message'];
-              echo "<p class='text-success text-center'>$message </p>"; 
-            }
+         if (isset($_POST['approvelResult'])){
+               $matricNumber = $_POST['matric_no'];
+               $requestedCompany = $_POST['requested_by']; 
 
-            else if($statusFlag == "failed" ){
-              $message= $_GET['message'];
-              echo "<p class='text-danger text-center'>$message </p>"; 
-            }
+               //run  a query to check if the request has already been approved 
+               $sql =  "SELECT  * FROM co_request WHERE studentid  = '$matricNumber' AND requestedby = '$requestedCompany' " ; 
+               $result = mysqli_query($conn , $sql );  
+
+               // check if result has record
+                if (mysqli_num_rows($result) > 0) { 
+
+                    //Now check if the result has already been approved 
+                    $row = mysqli_fetch_assoc($result) ; 
+                    $transcriptUrl = $row['transcripturl']; 
+                    
+                    if($transcriptUrl == null){
+                        //now check if this students transcript has been uploaded in the first place 
+
+                        $sql = "SELECT * FROM co_students WHERE matric_no = '$matricNumber' ";
+                        $result = mysqli_query ($conn , $sql);
+                        if (mysqli_num_rows($result) > 0) {
+                            $row = mysqli_fetch_assoc($result) ; 
+                            $transcriptUrl = $row['transurl']; 
+
+                             if ($transcriptUrl == null){
+                                echo "<p class='text-center text-info'> Sorry you need to first upload the student transcript before granting access.</p>"; 
+                             }
+                             else{
+                                 //grant request now 
+                                $sql = "UPDATE co_request SET status='APPROVED' , transcripturl = '$transcriptUrl' WHERE studentid = '$matricNumber'  ";
+                                $result = mysqli_query($conn , $sql);
 
 
-           }
-         
+                                if($result){
+                                    echo "<p class='text-center text-success'> Transcript request has been approved successfully.$transcriptUrl  </p>"; 
+              
+                                }
+                                else{
+                                    echo "<p class='text-center text-info'> Sorry an error occurred, please try again later</p>"; 
+              
+
+                                }
+                            }
+                        } 
+                        else{
+                            echo "<p class='text-center text-info'> Sorry seems student record is no longer avalible in our database. $matricNumber</p>"; 
+              
+                        }
+                    }
+                    else{
+                        echo "<p class='text-center text-info'> You have already granted access for this company </p>"; 
+              
+                    }
+                   
+
+                    
+                  
+                }
+                else{
+                    echo "<p class='text-center text-warning'> Sorry No student was found with this credentials </p>"; 
+                }
+
+
+
+         }         
          ?>
 	  
     </div>
@@ -127,15 +167,13 @@ $username = $_SESSION['adminusername'];
     <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Full Name</th>
+        <th>Student Name</th>
         <th>Student ID</th>
-        <th>Sex</th>
-        <th> Email </th>
-        <th> Phone </th>
-        <th> Level </th>
-        <th> Course </th>
-        <th> Upload Transcript </th>
-        <th> View Transcript </th>
+        <th>Course</th>
+        <th> Requested By </th>
+        <th> Status </th>
+        <th> Approve </th>
+        
        
       </tr>
     </thead>
@@ -143,7 +181,7 @@ $username = $_SESSION['adminusername'];
 <?php 
 $schoolid = $_SESSION['school_id'];
   //Pull out data  
-$sql = "SELECT * FROM  co_students WHERE school_id like '%$schoolid%' ";
+$sql = "SELECT * FROM  co_request WHERE school_id like '%$schoolid%' ";
 // The data returned is stored in the result variable
 $result = mysqli_query($conn, $sql);
 
@@ -153,66 +191,47 @@ if (mysqli_num_rows($result) > 0) {
   // loops through each row to populate the table
   while($row = mysqli_fetch_assoc($result)) {
 
-      echo "<tr>
-              <td>".$row['name']."</td>
-              <td>".$row['matric_no']."</td>
-              <td>".$row['sex']."</td>
-              <td>".$row['email']."</td>
-              <td>".$row['phone']."</td>
-              <td>".$row['level']."</td>
-              <td>".$row['programme']."</td> ";
+    $studentid = $row['studentid'];
+    $requestedby = $row['requestedby']; 
+    $status = $row['status'];
+    $changedStatus = "";
+    if($status == 'DENIED'){
+          $changedStatus = 'Pending';
+           }
+    else{
+           $changedStatus = 'Approved';
+          }
+                        
+   
 
-              $matric = $row['matric_no'];
+      echo "<tr>
+              <td>".$row['studentname']."</td>
+              <td>".$row['studentid']."</td>
+              <td>".$row['course']."</td>
+              <td>".$row['requestedby']."</td>
+              <td>".$changedStatus."</td>";
+             
+
+            // //   $matric = $row['matric_no'];
 
               echo "
               <td> 
-                <form action='uploadscript.php' method='post' enctype='multipart/form-data'> 
+                <form action='transcriptrequest.php' method='post'> 
                 <div class='form-group row'>
-                <input type='hidden' name= 'matric_no' value= '$matric' />
-                   <div class='col-12'>
-                   <input type='file' name='file'required/>
-                  </div> 
+                <input type='hidden' name= 'matric_no' value= '$studentid' />
+                <input type='hidden' name = 'requested_by' value= '$requestedby' />
+                  
                 <div class='col-12 mt-3'>
-                <button class='btn btn-success' name='submitresult' type='submit'>Upload</button>
+                <button class='btn btn-success' name='approvelResult' type='submit'>Approve Request</button>
                 </div> 
     
-              </div>
-
-
-
-
-                  
-                  
-                  
-                </form>
-              </td> ";
-
-                if ($row['transurl']===null){
-                  echo "
-                  <td> 
-                  <a type='button' class='btn btn-light'  disabled>Empty Transcript</a>
-                  </td>
-                 ";
-            
-
-                }
-                else{
-                  $url = $row['transurl']; 
-                  echo "
-                  <td> 
-                  <a type='button' class='btn btn-success' href='http://localhost/etransys/uploads/$url' >View Transcript</a>
-                  </td>
-                 ";
-
-                }
-
-
-
-
+              </div>     
+           </form>
+           </td> ";
   }
 }
 else{
-  echo "<p class='bg-warning'> No student profile found. </p>";
+  echo "<p class='bg-warning text-center'> No student profile found. </p>";
 }
 
 

@@ -79,7 +79,7 @@
 	<!-- Adding Carousel  -->
 	   <div class="container">
 	   	  <h1 class="text-center"> School </h1>
-	   	  <p class="text-center">Access your school management system</p>
+	   	  <p class="text-center">Access your school transcript system</p>
 
 	   </div>
 	<!-- Closing Carousel -->

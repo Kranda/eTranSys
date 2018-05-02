@@ -135,6 +135,10 @@ if(isset($_POST['submit'])){
       <li class="nav-item ">
         <a class="nav-link" href="uploadresult.php">Upload Transcript |</a>
       </li>
+      
+      <li class="nav-item ">
+        <a class="nav-link" href="transcriptrequest.php">Transcript Requests |</a>
+      </li>
       <li class="nav-item "> 
         <a class="nav-link" href="logout.php">Logout </a>
       </li>
@@ -152,11 +156,6 @@ if(isset($_POST['submit'])){
 	   <div class="container">
 	   	  <h1 class="text-center">Register New Student</h1> 
 
-     
-
-     
-             
-          
 
 	   	  <div class="row ">
                   <div class="col-8 mx-auto mb-5">
@@ -187,7 +186,7 @@ if(isset($_POST['submit'])){
   </div>
 
   <div class="form-group">
-    <label for="department">Course</label>
+    <label for="department">Major</label>
     <input type="department" class="form-control"   name="department" placeholder="Course" required>
   </div>
 
@@ -204,10 +203,12 @@ if(isset($_POST['submit'])){
       <label for="level"> Current Level</label>
       <select id="level" class="form-control" name="level" required>
         <option selected value="">Choose...</option>
-        <option name="100">1st year</option>
-        <option name="200">2nd year</option>
-        <option name="300">3rd year</option>
-        <option name="400">4th year</option>
+        <option value = "100"name="100">1st year</option>
+        <option value ="200" name="200">2nd year</option>
+        <option value="300" name="300">3rd year</option>
+        <option value="400" name="400">4th year</option>
+        <option value ="Masters" name="500">Masters</option>
+        <option value="Doctoral" name="600">Doctoral</option>
       </select>
     </div>
     <div class="form-group col-md-4">
